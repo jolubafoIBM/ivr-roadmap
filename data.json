@@ -1,0 +1,156 @@
+{
+  "meta": {
+    "version": "1.0",
+    "lastUpdated": "",
+    "lastUpdatedBy": "",
+    "sprintDates": {
+      "s13": "PDN 9 Oct 2026",
+      "s14": "PDN 23 Oct 2026",
+      "s15": "PDN 6 Nov 2026",
+      "s16": "Nov 2026",
+      "bk":  "Sin fecha comprometida"
+    }
+  },
+  "items": {
+    "nlp": {
+      "s13": [
+        { "id": "UST-NLP-S13", "name": "Flujos conversacionales Cancelación OTP (×9)", "type": "dev", "comment": "Sprint 13 congelado — solo QA y deploy", "dep": "", "owner": "Jimena, Andrea", "date": "9 Oct 2026" }
+      ],
+      "s14": [
+        { "id": "INC_ANA_51", "name": "Bifurcación cierre condicional ★", "type": "q1", "comment": "C1 Prioritario F:4.2 I:4.2 — hacer primero", "dep": "", "owner": "Jimena", "date": "" },
+        { "id": "INC_ANA_53", "name": "Manejo ruido encuesta ★", "type": "q1", "comment": "C1 Prioritario F:4.5 I:4.3", "dep": "", "owner": "Jimena", "date": "" },
+        { "id": "INC_ANA_55", "name": "Manejo utterances prolongados ★", "type": "q1", "comment": "C1 Prioritario F:4.2 I:4.3", "dep": "", "owner": "Andrea", "date": "" },
+        { "id": "INC_ANA_52", "name": "Memoria conversacional", "type": "q2", "comment": "C2 — dep. de ANA_51", "dep": "INC_ANA_51", "owner": "", "date": "" },
+        { "id": "INC_ANA_56", "name": "Filtro fragmentos captura doc.", "type": "q3", "comment": "C3 Fácil", "dep": "", "owner": "", "date": "" },
+        { "id": "INC_ANA_58", "name": "Disparador global Asesor", "type": "q3", "comment": "C3 Fácil", "dep": "", "owner": "", "date": "" },
+        { "id": "INC_ANA_59", "name": "Ajuste intenciones reclamo fact.", "type": "q3", "comment": "C3 Fácil", "dep": "", "owner": "", "date": "" },
+        { "id": "INC_ANA_61", "name": "Supresión frase cierre con fricción", "type": "q3", "comment": "C3 Fácil", "dep": "", "owner": "", "date": "" },
+        { "id": "INC_ANA_54", "name": "Información accionable", "type": "q4", "comment": "C4 — revisar si entra en S14", "dep": "", "owner": "", "date": "" },
+        { "id": "INC_ANA_57", "name": "Desacoplamiento secuencial", "type": "q4", "comment": "C4", "dep": "", "owner": "", "date": "" },
+        { "id": "INC_ANA_60", "name": "Calibración VAD apertura micrófono", "type": "q4", "comment": "C4", "dep": "", "owner": "", "date": "" },
+        { "id": "INC_ANA_62", "name": "Inversión orden captura prepago", "type": "q4", "comment": "C4", "dep": "", "owner": "", "date": "" },
+        { "id": "INC_ANA_63", "name": "Flujo retención/autogestión baja plan", "type": "q4", "comment": "C4", "dep": "", "owner": "", "date": "" },
+        { "id": "INC_ANA_64", "name": "Integración API CRM pospago", "type": "q2", "comment": "C2 — depende de API Claro", "dep": "", "owner": "", "date": "" },
+        { "id": "INC_ANA_65", "name": "Reportería normativa RFP", "type": "q4", "comment": "C4", "dep": "", "owner": "", "date": "" },
+        { "id": "INC-NLP-s14", "name": "Incidentes NLP activos (×14 agrupados)", "type": "inc", "comment": "⚠ Revisar individualmente — alta carga S14", "dep": "", "owner": "", "date": "" }
+      ],
+      "s15": [
+        { "id": "UST-NLP-S15", "name": "Flujos NLP Facturación + Inhabilitación (×9)", "type": "dev", "comment": "", "dep": "UST329,UST341", "owner": "", "date": "" }
+      ],
+      "s16": [],
+      "bk": [
+        { "id": "UST-NLP-BK1", "name": "Mejoras NLP Curaduria evolutivo (×23)", "type": "q4", "comment": "", "dep": "", "owner": "", "date": "" },
+        { "id": "UST-NLP-BK2", "name": "Mejoras NLP sin fecha comprometida (×11)", "type": "q4", "comment": "", "dep": "", "owner": "", "date": "" }
+      ]
+    },
+    "backend": {
+      "s13": [
+        { "id": "UST222",     "name": "Implementación Release Cancelación", "type": "dev", "comment": "", "dep": "UST221", "owner": "Emerson", "date": "9 Oct" },
+        { "id": "UST217",     "name": "Arquitectura flujo Cancelación", "type": "dev", "comment": "", "dep": "", "owner": "Fabián", "date": "" },
+        { "id": "UST-BE-S13", "name": "Backend Cancelación OTP (×10 agrupados)", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" }
+      ],
+      "s14": [
+        { "id": "UST329", "name": "Inception Facturación", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" },
+        { "id": "UST341", "name": "Inception Inhabilitación", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" },
+        { "id": "UST343", "name": "Diseño Comp. Integración Inhabilitación", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" },
+        { "id": "UST271", "name": "Diseño Comp. Integración Cancelación", "type": "dev", "comment": "Revisar scope para Fact.", "dep": "", "owner": "", "date": "" }
+      ],
+      "s15": [
+        { "id": "UST290", "name": "Diseño flujo Facturación ⚠ dup UST218", "type": "dev", "comment": "DUPLICADO REAL con UST218 — resolver antes S14", "dep": "", "owner": "", "date": "" },
+        { "id": "UST331", "name": "Diseño Comp. Integración Facturación", "type": "dev", "comment": "", "dep": "UST329", "owner": "", "date": "" },
+        { "id": "UST332", "name": "Diseño Reportería & Middleware Fact.", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" },
+        { "id": "UST344", "name": "Diseño Reportería & Middleware Inhab.", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" },
+        { "id": "UST348", "name": "Integración APIs Negocio Inhabilitación", "type": "dev", "comment": "", "dep": "UST343", "owner": "", "date": "" }
+      ],
+      "s16": [
+        { "id": "UST336", "name": "Integración APIs Negocio Facturación", "type": "dev", "comment": "", "dep": "UST331", "owner": "", "date": "" },
+        { "id": "UST337", "name": "Integración Middleware Facturación", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" },
+        { "id": "UST338", "name": "Ajustes IBM VG Facturación", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" },
+        { "id": "UST349", "name": "Integración Middleware Inhabilitación", "type": "dev", "comment": "", "dep": "UST343", "owner": "", "date": "" }
+      ],
+      "bk": [
+        { "id": "UST355", "name": "Latencia microservicios ⚠ dup UST316", "type": "q4", "comment": "DUPLICADO REAL con UST316", "dep": "", "owner": "", "date": "" }
+      ]
+    },
+    "ux": {
+      "s13": [
+        { "id": "UST221",     "name": "Diseño funcional Cancelación", "type": "dev", "comment": "", "dep": "UST220", "owner": "Mario", "date": "" },
+        { "id": "UST220",     "name": "Inception funcional Cancelación", "type": "dev", "comment": "", "dep": "", "owner": "Milena", "date": "" },
+        { "id": "UST-UX-S13", "name": "UX Cancelación restantes (×6)", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" }
+      ],
+      "s14": [
+        { "id": "UST330", "name": "Diseño Curaduría Facturación", "type": "dev", "comment": "", "dep": "UST329", "owner": "", "date": "" },
+        { "id": "UST342", "name": "Diseño Curaduría Inhabilitación", "type": "dev", "comment": "", "dep": "UST341", "owner": "", "date": "" },
+        { "id": "UST333", "name": "Diseño Pruebas Facturación", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" },
+        { "id": "UST345", "name": "Diseño Pruebas Inhabilitación", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" }
+      ],
+      "s15": [
+        { "id": "UST-UX-S15", "name": "UX Facturación + Inhabilitación (×3)", "type": "dev", "comment": "", "dep": "UST330,UST342", "owner": "", "date": "" }
+      ],
+      "s16": [],
+      "bk": [
+        { "id": "UST-UX-BK", "name": "Mejoras UX conversacional (×5)", "type": "q4", "comment": "", "dep": "", "owner": "", "date": "" }
+      ]
+    },
+    "devops": {
+      "s13": [
+        { "id": "UST321", "name": "Ajustes IBM VG Cancelación", "type": "dev", "comment": "", "dep": "", "owner": "Rafael", "date": "" }
+      ],
+      "s14": [
+        { "id": "INC-DO-s14", "name": "Incidentes operacionales activos (×4)", "type": "inc", "comment": "Revisar prioridad individualmente", "dep": "", "owner": "Miguel", "date": "" }
+      ],
+      "s15": [
+        { "id": "UST350", "name": "Ajustes IBM VG Inhabilitación", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" }
+      ],
+      "s16": [],
+      "bk": [
+        { "id": "UST-DO-BK", "name": "Monitoreo, Cloud, CI/CD, Infra (×22)", "type": "q4", "comment": "Candidatos para sprint post-Nov", "dep": "", "owner": "", "date": "" }
+      ]
+    },
+    "analytics": {
+      "s13": [
+        { "id": "UST-AN-S13", "name": "Reportería Cancelación OTP (×3)", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" }
+      ],
+      "s14": [
+        { "id": "INC_ANA_25",  "name": "Dashboard rellamada/recurrencia IVR", "type": "q2", "comment": "F:3.9 I:4.8 — C2 Alto Impacto", "dep": "", "owner": "", "date": "" },
+        { "id": "INC_ANA_24",  "name": "Dashboard operativo cognitivo", "type": "q3", "comment": "F:4.2 I:4.0 — C3 Fácil", "dep": "", "owner": "", "date": "" },
+        { "id": "INC_ANA_26",  "name": "Dashboard conciliación financiera", "type": "q4", "comment": "F:3.2 I:2.8 — C4", "dep": "", "owner": "", "date": "" },
+        { "id": "UST319",      "name": "AI Studio Reportería Cancelación", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" },
+        { "id": "UST335",      "name": "AI Studio Reportería Facturación", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" },
+        { "id": "UST317",      "name": "Diseño Reportería & Middleware Canc.", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" }
+      ],
+      "s15": [
+        { "id": "UST-AN-S15", "name": "Reportería Facturación + Inhabilitación (×2)", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" }
+      ],
+      "s16": [
+        { "id": "UST347", "name": "AI Studio Reportería Inhabilitación", "type": "dev", "comment": "", "dep": "UST341", "owner": "", "date": "" }
+      ],
+      "bk": [
+        { "id": "UST-AN-BK", "name": "Mejoras AI Studio / NOC / Métricas (×6)", "type": "q4", "comment": "", "dep": "", "owner": "", "date": "" }
+      ]
+    },
+    "qa": {
+      "s13": [
+        { "id": "UST322",     "name": "Ciclo de Pruebas I Cancelación", "type": "dev", "comment": "", "dep": "UST222", "owner": "Juan Pablo", "date": "" },
+        { "id": "UST323",     "name": "Ciclo de Pruebas II Cancelación", "type": "dev", "comment": "", "dep": "UST322", "owner": "Juan Pablo", "date": "" },
+        { "id": "UST-QA-S13", "name": "Set pruebas + certificación (×2)", "type": "dev", "comment": "", "dep": "", "owner": "", "date": "" }
+      ],
+      "s14": [
+        { "id": "UST333b", "name": "Diseño Pruebas Facturación", "type": "dev", "comment": "", "dep": "UST330", "owner": "", "date": "" },
+        { "id": "UST345b", "name": "Diseño Pruebas Inhabilitación", "type": "dev", "comment": "", "dep": "UST342", "owner": "", "date": "" }
+      ],
+      "s15": [
+        { "id": "UST339", "name": "Ciclo de Pruebas I Facturación", "type": "dev", "comment": "", "dep": "UST334", "owner": "", "date": "" },
+        { "id": "UST351", "name": "Ciclo de Pruebas I Inhabilitación", "type": "dev", "comment": "", "dep": "UST346", "owner": "", "date": "" },
+        { "id": "UST352", "name": "Ciclo de Pruebas II Inhabilitación", "type": "dev", "comment": "", "dep": "UST351", "owner": "", "date": "" }
+      ],
+      "s16": [
+        { "id": "UST340", "name": "Ciclo de Pruebas II Facturación", "type": "dev", "comment": "", "dep": "UST339", "owner": "", "date": "" }
+      ],
+      "bk": [
+        { "id": "UST272",    "name": "Herramienta pruebas regresión automáticas", "type": "q4", "comment": "", "dep": "", "owner": "", "date": "" },
+        { "id": "UST-QA-BK", "name": "Set pruebas backlog (×1)", "type": "q4", "comment": "", "dep": "", "owner": "", "date": "" }
+      ]
+    }
+  }
+}

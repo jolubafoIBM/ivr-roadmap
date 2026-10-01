@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IVR Roadmap Q4 2026</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --s13:#3b82d4;--s14:#7c5cd8;--s15:#0d9488;--s16:#d97706;--bk:#6b7280;
+  --radius:6px;--shadow:0 2px 8px rgba(0,0,0,.12);
+}
+body{font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:13px;line-height:1.5;background:#f0f2f5;color:#1f2328}
+
+/* ── TOOLBAR ── */
+.toolbar{background:#0f172a;color:#fff;padding:10px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+.toolbar-brand{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.toolbar h1{font-size:14px;font-weight:700;white-space:nowrap}
+.tag{font-size:11px;padding:2px 8px;border-radius:8px;white-space:nowrap;font-weight:600}
+.tag-blue{background:#1e3a8a;color:#bfdbfe}
+.tag-green{background:#065f46;color:#6ee7b7}
+.tag-amber{background:#78350f;color:#fde68a}
+.tag-red{background:#7f1d1d;color:#fca5a5}
+.tag-gray{background:#374151;color:#d1d5db}
+.toolbar-right{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.btn{font-size:11px;font-weight:600;padding:5px 13px;border-radius:5px;border:none;cursor:pointer;white-space:nowrap;transition:opacity .15s}
+.btn:hover{opacity:.85}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:#3b82d4;color:#fff}
+.btn-purple{background:#7c5cd8;color:#fff}
+.btn-green{background:#065f46;color:#6ee7b7}
+.btn-ghost{background:#374151;color:#d1d5db}
+.btn-amber{background:#92400e;color:#fde68a}
+.spin{display:inline-block;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.save-flash{font-size:11px;color:#6ee7b7;opacity:0;transition:opacity .4s;white-space:nowrap}
+.save-flash.show{opacity:1}
+
+/* ── SETUP BANNER ── */
+.setup-banner{background:#1e3a8a;color:#bfdbfe;padding:10px 20px;font-size:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.setup-banner strong{color:#fff}
+.setup-banner input{font-size:12px;padding:4px 10px;border-radius:5px;border:1px solid #3b82d4;background:#0f172a;color:#e2e8f0;width:220px;outline:none}
+.setup-banner input:focus{border-color:#60a5fa}
+.setup-banner .sep{color:#475569}
+
+/* ── CONFLICT BANNER ── */
+.conflict-banner{display:none;background:#7f1d1d;color:#fca5a5;padding:10px 20px;font-size:12px;gap:10px;align-items:center;flex-wrap:wrap}
+.conflict-banner.show{display:flex}
+
+/* ── PAGE ── */
+.page{max-width:1300px;margin:0 auto;padding:16px 20px 48px}
+
+/* ── LEGEND ── */
+.legend-row{display:flex;gap:10px;flex-wrap:wrap;font-size:11px;align-items:center;margin-bottom:12px}
+.leg{display:flex;align-items:center;gap:4px}
+.ldot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.hint{color:#9ca3af;font-size:11px}
+
+/* ── CAPACITY PANEL ── */
+.cap-panel{background:#fff;border:1px solid #e5e7eb;border-radius:var(--radius);padding:14px 18px;margin-bottom:12px;display:none}
+.cap-panel.open{display:block}
+.cap-panel-title{font-size:13px;font-weight:700;color:#374151;margin-bottom:10px}
+.cap-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.cap-name{width:170px;font-size:11px;font-weight:600;color:#374151;flex-shrink:0}
+.cap-track{flex:1;background:#f3f4f6;border-radius:3px;height:13px;overflow:hidden}
+.cap-fill{height:100%;border-radius:3px;transition:width .4s}
+.cap-val{width:80px;font-size:11px;color:#57606a;text-align:right;flex-shrink:0}
+.cap-members{width:200px;font-size:10px;color:#9ca3af;flex-shrink:0}
+
+/* ── RISK BANNER ── */
+.risk-banner{background:#fef2f2;border:1px solid #fca5a5;border-radius:var(--radius);padding:9px 14px;font-size:12px;color:#7f1d1d;margin-bottom:12px}
+
+/* ── TIMELINE ── */
+.tl-wrap{overflow-x:auto}
+.tl-grid{display:grid;grid-template-columns:122px repeat(5,1fr);gap:4px;min-width:860px}
+.tl-header{margin-bottom:4px}
+.tl-cell{padding:9px 12px;text-align:center;font-weight:700;font-size:12px;color:#fff;border-radius:var(--radius) var(--radius) 0 0;position:relative}
+.tl-cell .snum{font-size:17px;font-weight:800;line-height:1;margin-bottom:1px}
+.tl-cell .sdate{font-size:10px;font-weight:400;opacity:.85;margin-top:1px}
+.tl-cell .edit-dt{position:absolute;top:5px;right:7px;font-size:10px;cursor:pointer;opacity:.4;background:transparent;border:none;color:#fff;transition:opacity .15s}
+.tl-cell .edit-dt:hover{opacity:1}
+.frozen{font-size:9px;opacity:.65;display:block;margin-top:1px}
+.s13c{background:var(--s13)}.s14c{background:var(--s14)}.s15c{background:var(--s15)}
+.s16c{background:var(--s16)}.sbkc{background:var(--bk)}
+
+/* ── TRIBU ROWS ── */
+.board{min-width:860px}
+.tribu-row{display:grid;grid-template-columns:122px repeat(5,1fr);gap:4px;margin-bottom:5px;align-items:start}
+.tribu-label{font-size:11px;padding:6px 10px 6px 0;border-right:2px solid #e5e7eb}
+.tribu-name{font-weight:700;font-size:12px}
+.tribu-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:3px;vertical-align:middle}
+.tribu-meta{font-size:10px;color:#9ca3af;margin-top:2px}
+.tribu-sp{font-size:10px;font-weight:700;margin-top:2px}
+.cell{background:#fff;border:1px solid #e5e7eb;border-radius:5px;padding:6px 7px;min-height:42px}
+.cell.empty-cell{background:#f9fafb}
+.cell:hover .add-btn{opacity:1}
+
+/* ── ITEM CARDS ── */
+.item-card{border-radius:4px;padding:4px 7px;margin-bottom:3px;display:flex;gap:4px;align-items:flex-start;cursor:pointer;transition:box-shadow .12s;position:relative}
+.item-card:hover{box-shadow:0 1px 6px rgba(0,0,0,.15)}
+.iid{font-family:monospace;font-size:9px;color:#9ca3af;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.iname{flex:1;font-size:11px;line-height:1.35}
+.idel{font-size:11px;cursor:pointer;color:#9ca3af;background:none;border:none;padding:0;opacity:0;flex-shrink:0;transition:opacity .12s;line-height:1}
+.item-card:hover .idel{opacity:1}
+.cdot{width:6px;height:6px;border-radius:50%;background:#f59e0b;flex-shrink:0;margin-top:4px}
+.pill{display:inline-block;font-size:9px;font-family:monospace;border-radius:3px;padding:1px 5px;margin-top:2px;margin-right:2px}
+.pill-dep{background:#fee2e2;color:#991b1b}
+.pill-own{background:#dbeafe;color:#1e3a8a}
+.pill-dt{background:#ecfdf5;color:#065f46}
+.type-q1{background:#fef3c7;border-left:3px solid #f59e0b}
+.type-q2{background:#ede9fe;border-left:3px solid #7c5cd8}
+.type-q3{background:#d1fae5;border-left:3px solid #10b981}
+.type-q4{background:#f3f4f6;border-left:3px solid #9ca3af}
+.type-inc{background:#fee2e2;border-left:3px solid #ef4444}
+.type-dev{background:#dbeafe;border-left:3px solid #3b82d4}
+.add-btn{opacity:0;width:100%;margin-top:3px;font-size:11px;color:#9ca3af;background:none;border:1px dashed #d1d5db;border-radius:4px;padding:3px 0;cursor:pointer;text-align:center;transition:opacity .15s}
+.add-btn:hover{border-color:#6b7280;color:#374151}
+
+/* ── SUMMARY ── */
+.summary{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:20px}
+.scard{background:#fff;border:1px solid #e5e7eb;border-radius:var(--radius);padding:12px;text-align:center}
+.scard-num{font-size:26px;font-weight:800;line-height:1}
+.scard-lbl{font-size:10px;color:#57606a;margin-top:3px}
+
+/* ── MODALS ── */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:var(--radius);padding:22px;width:500px;max-width:96vw;max-height:92vh;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.modal h2{font-size:15px;font-weight:700;margin-bottom:14px}
+.frow{margin-top:11px}
+.frow label{display:block;font-size:11px;font-weight:600;color:#374151;margin-bottom:4px}
+.frow input,.frow select,.frow textarea{width:100%;border:1px solid #d1d5db;border-radius:5px;padding:7px 10px;font-size:13px;font-family:inherit;outline:none;transition:border-color .15s}
+.frow input:focus,.frow select:focus,.frow textarea:focus{border-color:#3b82d4;box-shadow:0 0 0 2px #dbeafe}
+.frow textarea{resize:vertical;min-height:65px}
+.modal-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+.dm{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:300;align-items:center;justify-content:center}
+.dm.open{display:flex}
+.dmbox{background:#fff;border-radius:var(--radius);padding:20px;width:320px;box-shadow:0 8px 30px rgba(0,0,0,.2)}
+.dmbox h3{font-size:13px;font-weight:700;margin-bottom:12px}
+.dmbox input{width:100%;border:1px solid #d1d5db;border-radius:5px;padding:7px 10px;font-size:13px;font-family:inherit;outline:none}
+.dmbox input:focus{border-color:#3b82d4}
+.dmbox-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+
+/* ── PRESENT MODE ── */
+body.present .toolbar{background:#0f172a;padding:14px 28px}
+body.present .add-btn{display:none!important}
+body.present .idel{display:none!important}
+body.present .risk-banner{display:none}
+body.present .setup-banner{display:none}
+body.present .item-card{cursor:default}
+body.present .tl-cell .edit-dt{display:none}
+
+/* ── EXPORT ── */
+.export-box{display:none;background:#fff;border:1px solid #e5e7eb;border-radius:var(--radius);padding:16px;margin-top:14px}
+.export-box textarea{width:100%;height:150px;font-family:monospace;font-size:11px;border:1px solid #e5e7eb;border-radius:5px;padding:8px;resize:vertical}
+
+@media print{.toolbar,.setup-banner,.add-btn,.idel,.risk-banner{display:none!important} body{background:#fff} .page{padding:8px}}
+</style>
+</head>
+<body>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div class="toolbar-brand">
+    <h1>🗺 IVR Roadmap Q4 2026</h1>
+    <span class="tag tag-blue">Sprint 13 actual</span>
+    <span class="tag tag-gray" id="tb-total">cargando…</span>
+    <span class="tag tag-amber" id="tb-comments">0 comentarios</span>
+    <span class="tag tag-green" id="tb-sync">⟳ sincronizando</span>
+  </div>
+  <div class="toolbar-right">
+    <button class="btn btn-purple" id="btn-present" onclick="togglePresent()">▶ Presentación</button>
+    <button class="btn btn-ghost" onclick="toggleCap()">📊 Capacidad</button>
+    <button class="btn btn-green" onclick="doExport()">⬇ CSV</button>
+    <button class="btn btn-ghost" onclick="doReset()">↺ Reset</button>
+    <button class="btn btn-primary" id="btn-save" onclick="doSave()">💾 Guardar en GitHub</button>
+    <span class="save-flash" id="save-flash">✓ Guardado en GitHub</span>
+  </div>
+</div>
+
+<!-- SETUP BANNER -->
+<div class="setup-banner" id="setup-banner">
+  <strong>⚙ Configuración GitHub:</strong>
+  <input id="cfg-owner"  placeholder="usuario / organización"  title="GitHub username u org">
+  <span class="sep">/</span>
+  <input id="cfg-repo"   placeholder="nombre-del-repo" style="width:160px">
+  <input id="cfg-branch" placeholder="rama (main)" style="width:100px">
+  <input id="cfg-token"  placeholder="ghp_TuTokenAquí (no se sube a GitHub)" type="password" style="width:200px">
+  <button class="btn btn-primary" onclick="cfgSave()">Conectar</button>
+  <span id="cfg-status" style="font-size:11px;color:#93c5fd"></span>
+</div>
+
+<!-- CONFLICT BANNER -->
+<div class="conflict-banner" id="conflict-banner">
+  ⚠ <strong>Conflicto:</strong> Otro usuario guardó cambios mientras editabas.
+  <button class="btn btn-amber" onclick="reloadRemote()">Cargar versión remota</button>
+  <button class="btn btn-ghost" onclick="document.getElementById('conflict-banner').classList.remove('show')">Ignorar y sobrescribir</button>
+</div>
+
+<div class="page">
+
+<!-- LEGEND -->
+<div class="legend-row">
+  <strong>Tipo:</strong>
+  <div class="leg"><div class="ldot" style="background:#f59e0b"></div>C1 Prioritario</div>
+  <div class="leg"><div class="ldot" style="background:#7c5cd8"></div>C2 Alto Impacto</div>
+  <div class="leg"><div class="ldot" style="background:#10b981"></div>C3 Fácil</div>
+  <div class="leg"><div class="ldot" style="background:#9ca3af"></div>C4 Revisar</div>
+  <div class="leg"><div class="ldot" style="background:#ef4444"></div>Incidente</div>
+  <div class="leg"><div class="ldot" style="background:#3b82d4"></div>Desarrollo Nuevo</div>
+  <div class="leg"><div class="ldot" style="background:#f59e0b;border-radius:50%"></div>🟡 comentario</div>
+  <span class="hint">· Clic en item para editar · 💾 guarda directamente en GitHub</span>
+</div>
+
+<!-- CAPACITY PANEL -->
+<div class="cap-panel" id="cap-panel">
+  <div class="cap-panel-title">📊 Capacidad del equipo por tribu (SP/sprint)</div>
+  <div id="cap-bars"></div>
+  <div style="margin-top:8px;font-size:11px;color:#57606a"><strong>Total bruto: 128 SP</strong> · Neto (~80%): <strong>102 SP</strong> · Buffer: 20%</div>
+</div>
+
+<!-- RISK BANNER -->
+<div class="risk-banner" id="risk-banner">
+  ⚠ <strong>Sprint 14 sobrecargado:</strong> NLP/Watson tiene 33 items vs. 16 SP disponibles.
+  Mover Cuadrante 4 al Backlog — priorizar solo C1 (ANA_51, 53, 55) + incidentes activos.
+  &nbsp;|&nbsp; <strong>3 duplicados reales</strong>: UST279/280, UST290/218, UST306/316.
+</div>
+
+<!-- TIMELINE -->
+<div class="tl-wrap">
+  <div class="tl-grid tl-header">
+    <div></div>
+    <div class="tl-cell s13c">
+      <div class="snum">13</div>Sprint 13
+      <div class="sdate" id="date-s13">PDN 9 Oct 2026</div>
+      <span class="frozen">🔒 Congelado</span>
+      <button class="edit-dt" onclick="openDM('s13')">✏</button>
+    </div>
+    <div class="tl-cell s14c">
+      <div class="snum">14</div>Sprint 14
+      <div class="sdate" id="date-s14">PDN 23 Oct 2026</div>
+      <button class="edit-dt" onclick="openDM('s14')">✏</button>
+    </div>
+    <div class="tl-cell s15c">
+      <div class="snum">15</div>Sprint 15
+      <div class="sdate" id="date-s15">PDN 6 Nov 2026</div>
+      <button class="edit-dt" onclick="openDM('s15')">✏</button>
+    </div>
+    <div class="tl-cell s16c">
+      <div class="snum">16</div>Sprint 16
+      <div class="sdate" id="date-s16">Nov 2026</div>
+      <button class="edit-dt" onclick="openDM('s16')">✏</button>
+    </div>
+    <div class="tl-cell sbkc">
+      <div class="snum" style="font-size:13px">∞</div>Backlog
+      <div class="sdate" id="date-bk">Sin fecha</div>
+      <button class="edit-dt" onclick="openDM('bk')">✏</button>
+    </div>
+  </div>
+  <div class="board" id="board"></div>
+</div>
+
+<div class="summary" id="summary"></div>
+<div class="export-box" id="export-box">
+  <strong style="font-size:12px">CSV exportado (Ctrl+A → Ctrl+C):</strong>
+  <textarea id="export-txt" readonly></textarea>
+  <button class="btn btn-ghost" style="margin-top:6px;font-size:12px" onclick="document.getElementById('export-box').style.display='none'">Cerrar</button>
+</div>
+</div>
+
+<!-- ITEM MODAL -->
+<div class="modal-bg" id="item-modal">
+  <div class="modal">
+    <h2>✏ Editar item</h2>
+    <input type="hidden" id="em-tribu">
+    <input type="hidden" id="em-sprint">
+    <input type="hidden" id="em-idx">
+    <div class="frow"><label>ID</label><input id="em-id" placeholder="UST000 / INC_ANA_00"></div>
+    <div class="frow"><label>Nombre</label><input id="em-name"></div>
+    <div class="frow"><label>Tipo / Cuadrante</label>
+      <select id="em-type">
+        <option value="dev">🔵 Desarrollo Nuevo</option>
+        <option value="q1">⭐ C1 Prioritario</option>
+        <option value="q2">🟣 C2 Alto Impacto</option>
+        <option value="q3">🟢 C3 Fácil</option>
+        <option value="q4">⬜ C4 Revisar</option>
+        <option value="inc">🔴 Incidente</option>
+      </select>
+    </div>
+    <div class="frow"><label>Sprint Target</label>
+      <select id="em-sprint-sel">
+        <option value="s13">Sprint 13 – 9 Oct (Congelado)</option>
+        <option value="s14">Sprint 14 – 23 Oct</option>
+        <option value="s15">Sprint 15 – 6 Nov</option>
+        <option value="s16">Sprint 16 – Nov</option>
+        <option value="bk">Backlog</option>
+      </select>
+    </div>
+    <div class="frow"><label>💬 Comentario / Decisión del equipo</label>
+      <textarea id="em-comment" placeholder="Ej: Mover a Sprint 15 por dep. con UST290 · Validar con Rafael · Bloqueado por API Claro…"></textarea>
+    </div>
+    <div class="frow"><label>⛓ Dependencia (ID bloqueante)</label><input id="em-dep" placeholder="Ej: UST290, UST336"></div>
+    <div class="frow"><label>👤 Responsable confirmado</label><input id="em-owner" placeholder="Ej: Emerson, Jimena"></div>
+    <div class="frow"><label>📅 Fecha estimada entrega</label><input id="em-date" placeholder="Ej: 20 Oct 2026"></div>
+    <div class="modal-btns">
+      <button class="btn" style="background:#7f1d1d;color:#fca5a5" onclick="delItem()">🗑 Eliminar</button>
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveItem()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- DATE MODAL -->
+<div class="dm" id="dm">
+  <div class="dmbox">
+    <h3>✏ Editar fecha / etiqueta de sprint</h3>
+    <input type="hidden" id="dm-key">
+    <input type="text" id="dm-val" placeholder="Ej: PDN 9 Oct 2026">
+    <div class="dmbox-btns">
+      <button class="btn btn-ghost" onclick="closeDM()">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveDM()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════
+// CONFIG — stored in localStorage only
+// ════════════════════════════════════════
+const CFG_KEY = 'ivr-gh-cfg';
+const DATA_FILE = 'data.json';
+
+function cfgLoad(){ try{ return JSON.parse(localStorage.getItem(CFG_KEY)||'{}'); }catch(e){ return {}; } }
+function cfgSave(){
+  const cfg = {
+    owner:  document.getElementById('cfg-owner').value.trim(),
+    repo:   document.getElementById('cfg-repo').value.trim(),
+    branch: document.getElementById('cfg-branch').value.trim() || 'main',
+    token:  document.getElementById('cfg-token').value.trim(),
+  };
+  if(!cfg.owner||!cfg.repo||!cfg.token){ alert('Completa usuario, repo y token'); return; }
+  localStorage.setItem(CFG_KEY, JSON.stringify(cfg));
+  document.getElementById('setup-banner').style.display='none';
+  document.getElementById('cfg-status').textContent='✓ Conectado';
+  loadFromGH();
+}
+function cfgApplyFields(){
+  const cfg = cfgLoad();
+  if(cfg.owner) document.getElementById('cfg-owner').value = cfg.owner;
+  if(cfg.repo)  document.getElementById('cfg-repo').value  = cfg.repo;
+  if(cfg.branch)document.getElementById('cfg-branch').value= cfg.branch;
+  if(cfg.token) document.getElementById('cfg-token').value = cfg.token;
+  if(cfg.owner && cfg.repo && cfg.token)
+    document.getElementById('setup-banner').style.display='none';
+}
+
+// ════════════════════════════════════════
+// GITHUB API
+// ════════════════════════════════════════
+let remoteSha = null; // SHA of last loaded file — needed for updates
+
+async function ghFetch(method, path, body){
+  const cfg = cfgLoad();
+  const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}`;
+  const headers = {
+    Authorization: `token ${cfg.token}`,
+    Accept: 'application/vnd.github.v3+json',
+    'Content-Type': 'application/json',
+  };
+  const opts = { method, headers };
+  if(body) opts.body = JSON.stringify(body);
+  const res = await fetch(url, opts);
+  if(!res.ok){
+    const err = await res.json().catch(()=>({}));
+    throw new Error(`GitHub ${res.status}: ${err.message||res.statusText}`);
+  }
+  return res.json();
+}
+
+async function loadFromGH(){
+  setSyncStatus('⟳ cargando…', 'tag-gray');
+  try {
+    const cfg = cfgLoad();
+    if(!cfg.token){ setSyncStatus('⚙ sin configurar', 'tag-amber'); return; }
+    const file = await ghFetch('GET', DATA_FILE);
+    remoteSha = file.sha;
+    const json = JSON.parse(atob(file.content.replace(/\n/g,'')));
+    applyRemote(json);
+    setSyncStatus('✓ sincronizado', 'tag-green');
+  } catch(e) {
+    setSyncStatus('⚠ '+e.message, 'tag-red');
+  }
+}
+
+async function doSave(){
+  const cfg = cfgLoad();
+  if(!cfg.token){ alert('Configura tu token de GitHub primero (barra superior).'); return; }
+  const btn = document.getElementById('btn-save');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin">⟳</span> Guardando…';
+  try {
+    // Check current SHA to detect conflicts
+    const current = await ghFetch('GET', DATA_FILE);
+    if(remoteSha && current.sha !== remoteSha){
+      document.getElementById('conflict-banner').classList.add('show');
+      btn.disabled = false; btn.textContent = '💾 Guardar en GitHub';
+      return;
+    }
+    const payload = buildPayload();
+    const now = new Date().toLocaleString('es-CO',{timeZone:'America/Bogota'});
+    payload.meta.lastUpdated = now;
+    payload.meta.lastUpdatedBy = cfg.owner;
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
+    const body = {
+      message: `chore: roadmap update ${now}`,
+      content,
+      branch: cfg.branch || 'main',
+      sha: current.sha,
+    };
+    const result = await ghFetch('PUT', DATA_FILE, body);
+    remoteSha = result.content.sha;
+    flash('✓ Guardado en GitHub');
+    setSyncStatus('✓ sincronizado', 'tag-green');
+  } catch(e) {
+    alert('Error al guardar: '+e.message);
+    setSyncStatus('⚠ error', 'tag-red');
+  } finally {
+    btn.disabled = false; btn.textContent = '💾 Guardar en GitHub';
+  }
+}
+
+async function reloadRemote(){
+  document.getElementById('conflict-banner').classList.remove('show');
+  await loadFromGH();
+}
+
+// ════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════
+const SPRINTS = ['s13','s14','s15','s16','bk'];
+const SLABELS = {s13:'Sprint 13',s14:'Sprint 14',s15:'Sprint 15',s16:'Sprint 16',bk:'Backlog'};
+const TRIBU_META = [
+  {key:'nlp',     name:'🧠 NLP / Watson',   dot:'#7c5cd8',sp:16, members:'Jimena · Andrea'},
+  {key:'backend', name:'🔧 Backend & Arq.',  dot:'#3b82d4',sp:58, members:'Emerson · Juan C. · Daniel · Angel · Juan D. · Fabián'},
+  {key:'ux',      name:'🎨 UX & Diseño',     dot:'#ec4899',sp:14, members:'Mario · Milena'},
+  {key:'devops',  name:'⚙️ DevOps & Cloud',  dot:'#f59e0b',sp:24, members:'Miguel · Jose M. · Rafael'},
+  {key:'analytics',name:'📊 Analytics & BI', dot:'#0d9488',sp:8,  members:'Analytics / BI'},
+  {key:'qa',      name:'🧪 QA & Testing',    dot:'#10b981',sp:8,  members:'Juan Pablo R.'},
+];
+
+let state = {};   // items by tribu/sprint
+let dates = {};   // sprint dates
+let presentMode = false;
+let capVisible = false;
+
+function applyRemote(json){
+  state = json.items  || {};
+  dates = json.meta?.sprintDates || {};
+  render();
+}
+
+function buildPayload(){
+  const cfg = cfgLoad();
+  return {
+    meta: { version:'1.0', lastUpdated:'', lastUpdatedBy: cfg.owner||'', sprintDates: dates },
+    items: state,
+  };
+}
+
+// ════════════════════════════════════════
+// RENDER
+// ════════════════════════════════════════
+function render(){
+  renderDates(); renderCapBars(); renderBoard(); renderSummary(); updateBadges();
+}
+
+function renderDates(){
+  SPRINTS.forEach(sp=>{ const el=document.getElementById('date-'+sp); if(el) el.textContent=dates[sp]||''; });
+}
+
+function renderCapBars(){
+  const total = TRIBU_META.reduce((a,t)=>a+t.sp,0);
+  const el = document.getElementById('cap-bars');
+  el.innerHTML = TRIBU_META.map(t=>{
+    const pct = Math.round(t.sp/total*100);
+    return `<div class="cap-row">
+      <div class="cap-name">${t.name}</div>
+      <div class="cap-track"><div class="cap-fill" style="background:${t.dot};width:${pct}%"></div></div>
+      <div class="cap-val"><strong>${t.sp} SP</strong> (${pct}%)</div>
+      <div class="cap-members">${t.members}</div>
+    </div>`;
+  }).join('')+`
+  <div class="cap-row" style="border-top:1px solid #e5e7eb;margin-top:4px;padding-top:4px">
+    <div class="cap-name" style="font-weight:700">NETO (80%)</div>
+    <div class="cap-track"><div class="cap-fill" style="background:#10b981;width:80%"></div></div>
+    <div class="cap-val" style="color:#065f46;font-weight:700">~${Math.round(total*.8)} SP</div>
+    <div class="cap-members" style="color:#9ca3af">buffer 20% incluido</div>
+  </div>`;
+}
+
+function renderBoard(){
+  const board = document.getElementById('board');
+  board.innerHTML='';
+  TRIBU_META.forEach(t=>{
+    const row=document.createElement('div'); row.className='tribu-row';
+    const cnt = SPRINTS.reduce((a,sp)=>a+((state[t.key]||{})[sp]||[]).length,0);
+    const lbl=document.createElement('div'); lbl.className='tribu-label';
+    lbl.innerHTML=`<div class="tribu-name"><span class="tribu-dot" style="background:${t.dot}"></span>${t.name}</div>
+      <div class="tribu-meta">${t.members}</div>
+      <div class="tribu-sp" style="color:${t.dot}">${t.sp} SP · ${cnt} items</div>`;
+    row.appendChild(lbl);
+    SPRINTS.forEach(sp=>{
+      const items=((state[t.key]||{})[sp]||[]);
+      const cell=document.createElement('div');
+      cell.className='cell'+(items.length===0?' empty-cell':'');
+      items.forEach((item,idx)=>{
+        const card=document.createElement('div');
+        card.className='item-card type-'+item.type;
+        card.title=item.comment||'Clic para editar';
+        let meta='';
+        if(item.dep)   meta+=`<span class="pill pill-dep">⛓ ${esc(item.dep)}</span>`;
+        if(item.owner) meta+=`<span class="pill pill-own">👤 ${esc(item.owner)}</span>`;
+        if(item.date)  meta+=`<span class="pill pill-dt">📅 ${esc(item.date)}</span>`;
+        card.innerHTML=`<span class="iid">${esc(item.id)}</span>
+          <span class="iname">${esc(item.name)}</span>
+          ${item.comment?`<span class="cdot" title="${esc(item.comment)}"></span>`:''}
+          <button class="idel" onclick="event.stopPropagation();qDel('${t.key}','${sp}',${idx})">✕</button>`;
+        if(meta){const md=document.createElement('div');md.style.marginTop='2px';md.innerHTML=meta;card.appendChild(md);}
+        card.addEventListener('click',()=>openModal(t.key,sp,idx));
+        cell.appendChild(card);
+      });
+      const add=document.createElement('button'); add.className='add-btn'; add.textContent='+ añadir';
+      add.addEventListener('click',()=>openModal(t.key,sp,-1));
+      cell.appendChild(add);
+      row.appendChild(cell);
+    });
+    board.appendChild(row);
+  });
+}
+
+function renderSummary(){
+  const s=document.getElementById('summary'); s.innerHTML='';
+  const colors={s13:'var(--s13)',s14:'var(--s14)',s15:'var(--s15)',s16:'var(--s16)',bk:'var(--bk)'};
+  SPRINTS.forEach(sp=>{
+    let c=0; TRIBU_META.forEach(t=>{ c+=((state[t.key]||{})[sp]||[]).length; });
+    const card=document.createElement('div'); card.className='scard';
+    card.style.borderTop='3px solid '+colors[sp];
+    card.innerHTML=`<div class="scard-num" style="color:${colors[sp]}">${c}</div>
+      <div class="scard-lbl">${SLABELS[sp]}<br><span style="color:#9ca3af">${dates[sp]||''}</span></div>`;
+    s.appendChild(card);
+  });
+}
+
+function updateBadges(){
+  let total=0,comments=0;
+  TRIBU_META.forEach(t=>SPRINTS.forEach(sp=>{
+    ((state[t.key]||{})[sp]||[]).forEach(i=>{ total++; if(i.comment) comments++; });
+  }));
+  document.getElementById('tb-total').textContent=total+' items';
+  document.getElementById('tb-comments').textContent=comments+' comentarios';
+}
+
+function setSyncStatus(txt, cls){
+  const el=document.getElementById('tb-sync');
+  el.textContent=txt; el.className='tag '+cls;
+}
+
+function flash(msg){
+  const el=document.getElementById('save-flash');
+  el.textContent=msg; el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),3000);
+}
+
+// ════════════════════════════════════════
+// ITEM MODAL
+// ════════════════════════════════════════
+function openModal(tribu,sprint,idx){
+  ['em-tribu','em-sprint','em-idx'].forEach((id,i)=>{
+    document.getElementById(id).value=[tribu,sprint,idx][i];
+  });
+  const item=idx===-1?{id:'',name:'',type:'dev',comment:'',dep:'',owner:'',date:''}:state[tribu][sprint][idx];
+  ['id','name','type','comment','dep','owner','date'].forEach(f=>{
+    document.getElementById('em-'+f).value=item[f]||'';
+  });
+  document.getElementById('em-sprint-sel').value=sprint;
+  document.getElementById('item-modal').classList.add('open');
+  setTimeout(()=>document.getElementById('em-name').focus(),80);
+}
+function closeModal(){ document.getElementById('item-modal').classList.remove('open'); }
+
+function saveItem(){
+  const tribu=document.getElementById('em-tribu').value;
+  const sprint=document.getElementById('em-sprint').value;
+  const idx=parseInt(document.getElementById('em-idx').value);
+  const newSprint=document.getElementById('em-sprint-sel').value;
+  const item={};
+  ['id','name','type','comment','dep','owner','date'].forEach(f=>{
+    item[f]=document.getElementById('em-'+f).value.trim();
+  });
+  if(!item.name){ alert('El nombre es obligatorio'); return; }
+  if(!state[tribu]) state[tribu]={};
+  SPRINTS.forEach(sp=>{ if(!state[tribu][sp]) state[tribu][sp]=[]; });
+  if(idx===-1)                   state[tribu][newSprint].push(item);
+  else if(newSprint!==sprint){ state[tribu][sprint].splice(idx,1); state[tribu][newSprint].push(item); }
+  else                           state[tribu][sprint][idx]=item;
+  closeModal(); render();
+}
+
+function delItem(){
+  const tribu=document.getElementById('em-tribu').value;
+  const sprint=document.getElementById('em-sprint').value;
+  const idx=parseInt(document.getElementById('em-idx').value);
+  if(idx===-1){closeModal();return;}
+  if(!confirm('¿Eliminar?'))return;
+  state[tribu][sprint].splice(idx,1);
+  closeModal(); render();
+}
+function qDel(tribu,sprint,idx){ if(!confirm('¿Eliminar?'))return; state[tribu][sprint].splice(idx,1); render(); }
+
+// ════════════════════════════════════════
+// DATE MODAL
+// ════════════════════════════════════════
+function openDM(k){ document.getElementById('dm-key').value=k; document.getElementById('dm-val').value=dates[k]||''; document.getElementById('dm').classList.add('open'); }
+function closeDM(){ document.getElementById('dm').classList.remove('open'); }
+function saveDM(){ dates[document.getElementById('dm-key').value]=document.getElementById('dm-val').value.trim(); closeDM(); render(); }
+
+// ════════════════════════════════════════
+// UTILS
+// ════════════════════════════════════════
+function togglePresent(){
+  presentMode=!presentMode;
+  document.body.classList.toggle('present',presentMode);
+  document.getElementById('btn-present').textContent=presentMode?'◼ Salir':'▶ Presentación';
+}
+function toggleCap(){
+  capVisible=!capVisible;
+  document.getElementById('cap-panel').classList.toggle('open',capVisible);
+}
+function doReset(){ if(!confirm('¿Recargar desde GitHub?'))return; loadFromGH(); }
+function doExport(){
+  const rows=['ID,Nombre,Tipo,Sprint,Tribu,Comentario,Dependencia,Responsable,Fecha'];
+  TRIBU_META.forEach(t=>SPRINTS.forEach(sp=>{
+    ((state[t.key]||{})[sp]||[]).forEach(item=>{
+      rows.push([item.id,item.name,item.type,SLABELS[sp],t.name,item.comment||'',item.dep||'',item.owner||'',item.date||''].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(','));
+    });
+  }));
+  const txt=rows.join('\n');
+  document.getElementById('export-txt').value=txt;
+  const box=document.getElementById('export-box'); box.style.display='block';
+  box.scrollIntoView({behavior:'smooth'});
+  if(navigator.clipboard) navigator.clipboard.writeText(txt).catch(()=>{});
+}
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+document.getElementById('item-modal').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeModal(); });
+document.getElementById('dm').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeDM(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){closeModal();closeDM();} });
+
+// ════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════
+cfgApplyFields();
+loadFromGH();
+// Auto-refresh every 2 minutes to pick up remote changes
+setInterval(()=>{ const cfg=cfgLoad(); if(cfg.token) loadFromGH(); }, 120000);
+</script>
+</body>
+</html>
