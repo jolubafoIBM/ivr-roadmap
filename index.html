@@ -386,7 +386,10 @@ async function loadFromGH(){
     try {
       const res = await fetch('./data.json?_='+Date.now());
       if(!res.ok) throw new Error('HTTP '+res.status);
-      const json = await res.json();
+      // Force UTF-8 decoding — GitHub Pages may serve without charset header
+      const buffer = await res.arrayBuffer();
+      const text = new TextDecoder('utf-8').decode(buffer);
+      const json = JSON.parse(text);
       applyRemote(json);
       setSyncStatus('👁 solo lectura (sin token)', 'tag-amber');
     } catch(e) {
